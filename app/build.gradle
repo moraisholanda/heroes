@@ -33,4 +33,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.5'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
     compile 'com.squareup.retrofit2:converter-gson:2.0.1'
+
+    //view
+    compile 'com.jakewharton:butterknife:8.0.1'
 }

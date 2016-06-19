@@ -21,7 +21,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiFactory {
     private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String BRAZILIAN_DATE_FORMAT = "dd/MM/yyyy";
-    public static final String VERSION_API = "v1/";
     public static final String API_KEY = "apikey";
     private static <T> T create(Class<T> endpoint) {
         return create(endpoint, DEFAULT_DATE_FORMAT);
@@ -38,7 +37,7 @@ public class ApiFactory {
 
     private static retrofit2.Retrofit buildRetroFit(OkHttpClient client, Gson gson) {
         return new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl("http://gateway.marvel.com:80")
                 .client(client)
                 .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
