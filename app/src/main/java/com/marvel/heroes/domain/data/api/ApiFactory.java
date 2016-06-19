@@ -10,6 +10,7 @@ import com.marvel.heroes.domain.data.parser.MixedDateDeserializer;
 import java.util.Date;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.HttpException;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -30,11 +31,19 @@ public class ApiFactory {
 
     private static <T> T create(Class<T> endpoint, String serializeDateFormat) {
         Gson gson = buildGson(serializeDateFormat);
-        client = new OkHttpClient();
+        client =buildHttpClient();
+
         Retrofit retrofit = buildRetroFit(client, gson);
         return retrofit.create(endpoint);
     }
-
+    private static OkHttpClient buildHttpClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(logging)
+                    .build();
+        return okHttpClient;
+    }
     private static retrofit2.Retrofit buildRetroFit(OkHttpClient client, Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl("http://gateway.marvel.com:80")

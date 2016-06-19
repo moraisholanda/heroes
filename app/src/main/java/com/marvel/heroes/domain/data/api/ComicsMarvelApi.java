@@ -4,7 +4,6 @@ import com.marvel.heroes.domain.data.dto.Comics;
 import com.marvel.heroes.domain.data.response.DataCollectionResponse;
 
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -16,6 +15,6 @@ import rx.Observable;
  */
 public interface ComicsMarvelApi {
 
-    @GET("/v1/public/characters/{comicId}")
-    Observable<DataCollectionResponse<List<Comics>>> getComics(@Path("comicId") Integer comicId, @Query("comics") Map<String,String> options);
+    @GET("/v1/public/characters/{comicId}/comics")
+    Observable<DataCollectionResponse<List<Comics>>> getComics(@Path("comicId") Integer comicId, @Query("ts")String timeStamp,@Query("apikey")String apikey,@Query("hash")String hash);
 }

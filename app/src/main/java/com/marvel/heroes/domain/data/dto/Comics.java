@@ -12,7 +12,7 @@ public class Comics {
 
     public String title;
 
-    public long issueNumber;
+    public double issueNumber;
 
     public String variantDescription;
 
