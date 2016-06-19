@@ -1,10 +1,11 @@
-package com.marvel.heroes.domain.model;
+package com.marvel.heroes.domain.data.dto;
+
+import java.util.List;
 
 /**
- * Created by sergio on 18/06/16.
+ * Created by sergio on 19/06/16.
  */
-public class ComicsMarvel {
-
+public class Comics {
     public long id;
 
     public long digitalId;
@@ -33,6 +34,15 @@ public class ComicsMarvel {
 
     public int pageCount;
 
+    public String name;
 
+    public Image thumbnail;
 
+    public Event comics;
+
+    public Serie series;
+
+    public Storie stories;
+
+    public List<Image> images;
 }
