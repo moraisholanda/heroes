@@ -17,12 +17,13 @@ public class ComicsPresenterImpl implements ComicsPresenter {
     private IComicsMarvelRepository repository;
     private ComicsView comicsView;
 
-    public ComicsPresenterImpl() {
+    public ComicsPresenterImpl(ComicsView comicsView) {
+        this.comicsView = comicsView;
         this.repository = new ComicsMarvelRepository();
     }
 
     @Override
-    public List<Comics> loadComics() {
+    public void loadComics() {
 
         repository.comics()
             .subscribe(new SimpleObserver<List<Comics>>(){
@@ -42,6 +43,5 @@ public class ComicsPresenterImpl implements ComicsPresenter {
                 }
             });
 
-        return null;
     }
 }
