@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,8 +25,10 @@ import butterknife.BindView;
 public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ViewHolder> {
 
     private List<Comics> comicsList;
+    private OnClickListenerComicsAdapter listenerComicsAdapter;
 
-    public ComicsAdapter(){
+    public ComicsAdapter(OnClickListenerComicsAdapter listenerComicsAdapter){
+        this.listenerComicsAdapter = listenerComicsAdapter;
         comicsList = new ArrayList<>();
     }
     public ComicsAdapter(List<Comics> comicsList) {
@@ -49,6 +52,14 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ViewHolder
         Glide.with(holder.view.getContext())
                 .load(comics.thumbnail.path.concat("/portrait_medium.jpg"))
                 .into(holder.imageView);
+        holder.itemRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listenerComicsAdapter!=null){
+                    listenerComicsAdapter.setItemClick(comics);
+                }
+            }
+        });
 
     }
 
@@ -75,6 +86,8 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ViewHolder
         ImageView imageView;
         @BindView(R.id.comic_number)
         TextView textView;
+        @BindView(R.id.item_row)
+        LinearLayout itemRow;
 
         public ViewHolder(View itemView) {
             super(itemView);

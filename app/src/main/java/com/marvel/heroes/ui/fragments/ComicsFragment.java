@@ -1,11 +1,11 @@
 package com.marvel.heroes.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
 import com.marvel.heroes.domain.data.interceptor.SharedConstants;
+import com.marvel.heroes.ui.activities.ComicsDetailActivity;
 import com.marvel.heroes.ui.adapter.ComicsAdapter;
+import com.marvel.heroes.ui.adapter.OnClickListenerComicsAdapter;
 import com.marvel.heroes.ui.presenter.ComicsPresenter;
 import com.marvel.heroes.ui.presenter.ComicsPresenterImpl;
 import com.marvel.heroes.ui.view.ComicsView;
@@ -27,12 +29,15 @@ import butterknife.BindView;
 /**
  * Created by sergio on 19/06/16.
  */
-public class ComicsFragment extends BaseFragment implements ComicsView {
+public class ComicsFragment extends BaseFragment implements ComicsView,OnClickListenerComicsAdapter {
 
 
+    public static final int SPAN_COUNT = 3;
     private ComicsAdapter adapter;
     private ComicsPresenter presenter;
     private StaggeredGridLayoutManager gridLayoutManager;
+
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -40,8 +45,8 @@ public class ComicsFragment extends BaseFragment implements ComicsView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new ComicsPresenterImpl(this);
-        adapter = new ComicsAdapter();
-        gridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        adapter = new ComicsAdapter(this);
+        gridLayoutManager = new StaggeredGridLayoutManager(SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL);
 
     }
 
@@ -56,7 +61,6 @@ public class ComicsFragment extends BaseFragment implements ComicsView {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView();
         if(savedInstanceState==null) {
-            Log.i(getClass().getSimpleName(), "First time running");
             loadComics();
         }
     }
@@ -64,7 +68,6 @@ public class ComicsFragment extends BaseFragment implements ComicsView {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.i(getClass().getSimpleName(), "onSaveInstanceState");
         List<Comics> comicsList = presenter.comicsParcelable();
         Parcelable comicParcelable = Parcels.wrap(comicsList);
         outState.putParcelable(SharedConstants.EXTRA_COMICS_LIST,comicParcelable);
@@ -74,7 +77,6 @@ public class ComicsFragment extends BaseFragment implements ComicsView {
         super.onViewStateRestored(savedInstanceState);
 
         if (savedInstanceState != null) {
-            Log.i(getClass().getSimpleName(), "onViewStateRestored");
             Parcelable comicsParcelable = savedInstanceState.getParcelable(SharedConstants.EXTRA_COMICS_LIST);
             List<Comics> comicsList = Parcels.unwrap(comicsParcelable);
             presenter.restoreParcelable(comicsList);
@@ -83,7 +85,6 @@ public class ComicsFragment extends BaseFragment implements ComicsView {
 
     private void loadComics(){
         presenter.loadComics();
-
     }
 
     private void setupRecyclerView() {
@@ -101,5 +102,10 @@ public class ComicsFragment extends BaseFragment implements ComicsView {
     @Override
     public void showError(String message) {
 
+    }
+
+    @Override
+    public void setItemClick(Comics comics) {
+        startActivity(new Intent(getActivity(), ComicsDetailActivity.class));
     }
 }
