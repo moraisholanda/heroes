@@ -6,6 +6,7 @@ import com.marvel.heroes.domain.repository.ComicsMarvelRepository;
 import com.marvel.heroes.domain.repository.IComicsMarvelRepository;
 import com.marvel.heroes.ui.view.ComicsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class ComicsPresenterImpl implements ComicsPresenter {
 
     private IComicsMarvelRepository repository;
     private ComicsView comicsView;
-
+    private List<Comics> comicsList;
     public ComicsPresenterImpl(ComicsView comicsView) {
         this.comicsView = comicsView;
         this.repository = new ComicsMarvelRepository();
@@ -24,11 +25,12 @@ public class ComicsPresenterImpl implements ComicsPresenter {
 
     @Override
     public void loadComics() {
-
+        comicsList = new ArrayList<>();
         repository.comics()
             .subscribe(new SimpleObserver<List<Comics>>(){
                 @Override
                 public void onNext(List<Comics> list) {
+                    comicsList = list;
                     comicsView.showComics(list);
                 }
 
@@ -43,5 +45,16 @@ public class ComicsPresenterImpl implements ComicsPresenter {
                 }
             });
 
+    }
+
+    @Override
+    public List<Comics> comicsParcelable() {
+        return (List<Comics>) ((ArrayList<Comics>) comicsList).clone();
+    }
+
+    @Override
+    public void restoreParcelable(List<Comics> comicsList) {
+        this.comicsList = comicsList;
+        comicsView.showComics(comicsList);
     }
 }

@@ -45,7 +45,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Comics comics = comicsList.get(position);
 
-        holder.textView.setText("# ".concat(String.valueOf(comics.issueNumber)));
+        holder.textView.setText(String.format("#%d", (int)comics.issueNumber));
         Glide.with(holder.view.getContext())
                 .load(comics.thumbnail.path.concat("/portrait_medium.jpg"))
                 .into(holder.imageView);
