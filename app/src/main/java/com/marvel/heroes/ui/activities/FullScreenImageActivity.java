@@ -1,6 +1,5 @@
 package com.marvel.heroes.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,32 +22,35 @@ public class FullScreenImageActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature( Window.FEATURE_NO_TITLE );
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.full_image_activity);
         ButterKnife.bind(this);
-        Intent intent = getIntent();
-        String imageId = intent.getStringExtra(SharedConstants.EXTRA_COMIC);
-        ImageView imageView = (ImageView)findViewById(R.id.full_image);
+        String pathImage = getIntent().getStringExtra(SharedConstants.EXTRA_COMIC);
+        ImageView imageView = (ImageView) findViewById(R.id.full_image);
+        setupToolbar();
+
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Glide.with(this)
+                .load(pathImage)
+                .into(imageView);
+
+    }
+
+    private void setupToolbar(){
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        toolbar.setNavigationOnClickListener(v -> finish());
-
-        getWindow().addFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN );
-        Glide.with(this)
-                .load(imageId)
-                .into(imageView);
-
-
     }
-    }
+}
 
 
 

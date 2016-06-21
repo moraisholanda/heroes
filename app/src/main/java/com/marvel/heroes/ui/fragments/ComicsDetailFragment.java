@@ -17,7 +17,11 @@ import com.bumptech.glide.Glide;
 import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
 import com.marvel.heroes.domain.data.interceptor.SharedConstants;
+import com.marvel.heroes.domain.tools.DateUtils;
 import com.marvel.heroes.ui.activities.FullScreenImageActivity;
+import com.marvel.heroes.ui.presenter.ComicsDetailImpl;
+import com.marvel.heroes.ui.presenter.ComicsDetailPresenter;
+import com.marvel.heroes.ui.view.ComicsDetailView;
 
 import org.parceler.Parcels;
 
@@ -27,7 +31,7 @@ import butterknife.OnClick;
 /**
  * Created by sergio on 19/06/16.
  */
-public class ComicsDetailFragment extends BaseFragment  {
+public class ComicsDetailFragment extends BaseFragment implements ComicsDetailView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -41,7 +45,9 @@ public class ComicsDetailFragment extends BaseFragment  {
     TextView datePublisehd;
     @BindView(R.id.price_magazine)
     TextView priceMagazine;
+
     private Comics comics;
+    private ComicsDetailPresenter presenter = new ComicsDetailImpl(this);
 
     public static ComicsDetailFragment newInstance(Comics comics){
         Bundle args = new Bundle();
@@ -69,7 +75,7 @@ public class ComicsDetailFragment extends BaseFragment  {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null) {
             comics = getComicsParcelableFromArgs();
-            showComicDetail();
+            presenter.showComicsDetail(comics);
         }
 
         AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
@@ -78,18 +84,6 @@ public class ComicsDetailFragment extends BaseFragment  {
         toolbar.setNavigationOnClickListener(v -> getActivity().finish());
 
     }
-
-    private void showComicDetail(){
-        Glide.with(getActivity())
-                .load(comics.thumbnail.getPathPortraitMedium())
-                .crossFade()
-                .into(magazineCover);
-        infoMagazine.setText(!TextUtils.isEmpty(comics.description) ? comics.description : "");
-        titleMagazine.setText(!TextUtils.isEmpty(comics.title) ? comics.title : "");
-        datePublisehd.setText(!TextUtils.isEmpty(comics.modified) ? comics.modified : "");
-        priceMagazine.setText(String.valueOf(comics.prices.get(0).price));
-    }
-
     @OnClick(R.id.magazine_cover)
     void openImageFullScreen(){
         Intent intent = new Intent(getActivity(), FullScreenImageActivity.class);
@@ -99,5 +93,17 @@ public class ComicsDetailFragment extends BaseFragment  {
     private Comics getComicsParcelableFromArgs() {
         Parcelable comic = getArguments().getParcelable(SharedConstants.EXTRA_COMIC);
         return Parcels.unwrap(comic);
+    }
+
+    @Override
+    public void showComicsDetail(Comics comics) {
+        Glide.with(getActivity())
+                .load(comics.thumbnail.getPathPortraitMedium())
+                .crossFade()
+                .into(magazineCover);
+        infoMagazine.setText(!TextUtils.isEmpty(comics.description) ? comics.description : "");
+        titleMagazine.setText(!TextUtils.isEmpty(comics.title) ? comics.title : "");
+        datePublisehd.setText(!TextUtils.isEmpty(comics.modified) ? DateUtils.parseDate(comics.modified) : "");
+        priceMagazine.setText(String.valueOf(comics.prices.get(0).price));
     }
 }
