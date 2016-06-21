@@ -49,4 +49,6 @@ public class Comics {
     public Storie stories;
 
     public List<Image> images;
+
+    public List<Price> prices;
 }

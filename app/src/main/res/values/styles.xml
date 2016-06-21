@@ -25,12 +25,24 @@
         <item name="titleTextColor">@android:color/white</item>
         <item name="android:textSize">12sp</item>
     </style>
-    <style name="Widget.CardContent" parent="android:Widget">
+    <style name="Widget.Content" parent="android:Widget">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">24dp</item>
         <item name="android:orientation">vertical</item>
     </style>
+    <style name="Widget.Label" parent="android:Widget">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/default_size_text_label</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">@dimen/default_margin_bottom_lable</item>
 
+    </style>
+    <style name="Widget.Text.Info" parent="android:Widget">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/default_size_text_label</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin_left_info</item>
+        <item name="android:layout_marginBottom">@dimen/default_margin_bottom_lable</item>
+    </style>
 </resources>

@@ -8,4 +8,5 @@ public class SharedConstants {
     public static final String TS = "ts";
     public static final String HASH = "hash";
     public static final String EXTRA_COMICS_LIST = "extraComicsList";
+    public static final String EXTRA_COMIC = "extraComic";
 }

@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2015 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
--->
-
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -69,109 +55,86 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="24dp">
-
-            <android.support.v7.widget.CardView
+            android:background="@color/colorBackground"
+            android:paddingTop="64dp">
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin">
+                tools:text="Title"
+                android:layout_marginLeft="@dimen/margin_default_detail"
+                android:layout_marginRight="@dimen/margin_default_detail"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:textColor="@android:color/white"
+                android:id="@+id/title_magazine"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <LinearLayout
-                    style="@style/Widget.CardContent"
+                    style="@style/Widget.Content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Info"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/info"
+                        android:textColor="@android:color/white"
                         android:text="@string/cheese_ipsum" />
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/card_margin"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin">
-
-                <LinearLayout
-                    style="@style/Widget.CardContent"
+                <RelativeLayout
+                    style="@style/Widget.Content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        style="@style/Widget.Label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Friends"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        android:text="@string/label_published"
+                        android:id="@+id/label_published" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cheese_ipsum" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/card_margin"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin">
-
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                        android:id="@+id/date_published"
+                        tools:text="1978/09/07"
+                        android:layout_toRightOf="@+id/label_published"
+                        android:layout_alignBaseline="@+id/label_published"
+                        style="@style/Widget.Text.Info"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_price"
+                        android:id="@+id/label_price"
+                        style="@style/Widget.Label"
+                        android:layout_below="@+id/date_published"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Related"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cheese_ipsum" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
+                        android:id="@+id/price_magazine"
+                        tools:text="$ 3.69"
+                        style="@style/Widget.Text.Info"
+                        android:layout_toRightOf="@+id/label_price"
+                        android:layout_below="@+id/date_published"
+                        android:layout_alignBaseline="@+id/label_price" />
+                </RelativeLayout>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
     <com.marvel.heroes.ui.view.CoordinatedImageView
-        android:id="@+id/logo"
-        android:layout_width="122dp"
-        android:layout_height="122dp"
+        android:id="@+id/magazine_cover"
+        android:layout_width="110dp"
+        android:layout_height="142dp"
         android:scaleType="centerCrop"
+        android:background="#FFFFFF"
         android:src="@drawable/header_spiderman"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|start" />
 
-<!--    <android.support.design.widget.FloatingActionButton
-        android:layout_height="140dp"
-        android:layout_width="120dp"
-        android:scaleType="center"
-        app:layout_anchor="@id/appbar"
-        app:borderWidth="2dp"
-        app:layout_anchorGravity="bottom|left|end"
-        android:src="@drawable/header_spiderman"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"/>-->
 
 </android.support.design.widget.CoordinatorLayout>

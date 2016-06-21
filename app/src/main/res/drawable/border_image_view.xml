@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/colorBackground" />
+    <stroke android:width="@dimen/padding_default_border" android:color="#FFFFFF" />
+    <padding
+        android:left="@dimen/padding_default_border"
+        android:top="@dimen/padding_default_border"
+        android:right="@dimen/padding_default_border"
+        android:bottom="@dimen/padding_default_border" />
+</shape>

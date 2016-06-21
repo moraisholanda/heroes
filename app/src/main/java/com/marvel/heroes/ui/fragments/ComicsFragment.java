@@ -106,6 +106,9 @@ public class ComicsFragment extends BaseFragment implements ComicsView,OnClickLi
 
     @Override
     public void setItemClick(Comics comics) {
-        startActivity(new Intent(getActivity(), ComicsDetailActivity.class));
+        Intent intent = new Intent(getActivity(),ComicsDetailActivity.class);
+        Parcelable parcelable = Parcels.wrap(comics);
+        intent.putExtra(SharedConstants.EXTRA_COMIC, parcelable);
+        startActivity(intent);
     }
 }
