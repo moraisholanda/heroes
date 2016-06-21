@@ -13,5 +13,8 @@
     <string name="label_page">Page :</string>
     <string name="label_btn_retry">Tentar novamente</string>
     <string name="label_btn_settings">Ir para configurações de internet</string>
-    <string name="error_network_connection">Verifique sua conexão!</string>
+
+    <string name="exception_network_connection">Verifique sua conexão!</string>
+    <string name="exception_message_generic">Tente novamente!</string>
+    <string name="exception_message_comics_not_found">Não foi possível fazer a busca com os criterios informados!</string>
 </resources>

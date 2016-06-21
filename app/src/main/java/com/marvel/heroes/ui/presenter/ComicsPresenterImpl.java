@@ -1,8 +1,12 @@
 package com.marvel.heroes.ui.presenter;
 
 import com.marvel.heroes.HeroesApplication;
-import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
+import com.marvel.heroes.domain.data.error.ComicsNotFoundException;
+import com.marvel.heroes.domain.data.error.DefaultErrorBundle;
+import com.marvel.heroes.domain.data.error.ErrorBundle;
+import com.marvel.heroes.domain.data.error.ErrorMessageFactory;
+import com.marvel.heroes.domain.data.error.NetworkConnectionException;
 import com.marvel.heroes.domain.data.response.SimpleObserver;
 import com.marvel.heroes.domain.repository.ComicsMarvelRepository;
 import com.marvel.heroes.domain.repository.IComicsMarvelRepository;
@@ -36,29 +40,36 @@ public class ComicsPresenterImpl implements ComicsPresenter {
                         @Override
                         public void onNext(List<Comics> list) {
                             comicsList = list;
-                            comicsView.hideLoading();
-                            comicsView.hideRetry();
-                            comicsView.showComics(list);
+                            if(comicsList.size()==0){
+                                shorErrorMessage(new DefaultErrorBundle(new ComicsNotFoundException()));
+                            }else {
+                                comicsView.showComics(list);
+                            }
                         }
 
                         @Override
                         public void onError(Throwable e) {
                             comicsView.hideLoading();
-                            comicsView.showError(e.getMessage());
+                            shorErrorMessage(new DefaultErrorBundle((Exception) e));
+
                         }
 
                         @Override
                         public void onCompleted() {
-                            ;
+                            comicsView.hideLoading();
+                            comicsView.hideRetry();
                         }
                     });
         }else{
             comicsView.hideLoading();
             comicsView.showRetry();
-            comicsView.showError(HeroesApplication.getInstance().getString(R.string.error_network_connection));
+            shorErrorMessage(new DefaultErrorBundle(new NetworkConnectionException()));
         }
 
+    }
 
+    private void shorErrorMessage(ErrorBundle errorBundle){
+        comicsView.showError(ErrorMessageFactory.create(HeroesApplication.getInstance(),errorBundle.getException()));
     }
 
     @Override
