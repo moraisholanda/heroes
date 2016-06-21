@@ -13,5 +13,13 @@ public interface ComicsView {
 
     void showError(String message);
 
+    void hideLoading();
+
+    void showLoading();
+
+    void showRetry();
+
+    void hideRetry();
+
 
 }

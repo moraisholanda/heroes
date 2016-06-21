@@ -11,7 +11,7 @@ import com.marvel.heroes.HeroesApplication;
  */
 public class ConectivityUtil {
 
-    public boolean isThereInternetConnection() {
+    public static boolean isThereInternetConnection() {
         boolean isConnected;
 
 

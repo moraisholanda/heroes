@@ -1,9 +1,12 @@
 package com.marvel.heroes.ui.presenter;
 
+import com.marvel.heroes.HeroesApplication;
+import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
 import com.marvel.heroes.domain.data.response.SimpleObserver;
 import com.marvel.heroes.domain.repository.ComicsMarvelRepository;
 import com.marvel.heroes.domain.repository.IComicsMarvelRepository;
+import com.marvel.heroes.domain.tools.ConectivityUtil;
 import com.marvel.heroes.ui.view.ComicsView;
 
 import java.util.ArrayList;
@@ -26,24 +29,35 @@ public class ComicsPresenterImpl implements ComicsPresenter {
     @Override
     public void loadComics() {
         comicsList = new ArrayList<>();
-        repository.comics()
-            .subscribe(new SimpleObserver<List<Comics>>(){
-                @Override
-                public void onNext(List<Comics> list) {
-                    comicsList = list;
-                    comicsView.showComics(list);
-                }
+        comicsView.showLoading();
+        if(ConectivityUtil.isThereInternetConnection()){
+            repository.comics()
+                    .subscribe(new SimpleObserver<List<Comics>>(){
+                        @Override
+                        public void onNext(List<Comics> list) {
+                            comicsList = list;
+                            comicsView.hideLoading();
+                            comicsView.hideRetry();
+                            comicsView.showComics(list);
+                        }
 
-                @Override
-                public void onError(Throwable e) {
-                    comicsView.showError(e.getMessage());
-                }
+                        @Override
+                        public void onError(Throwable e) {
+                            comicsView.hideLoading();
+                            comicsView.showError(e.getMessage());
+                        }
 
-                @Override
-                public void onCompleted() {
-                   ;
-                }
-            });
+                        @Override
+                        public void onCompleted() {
+                            ;
+                        }
+                    });
+        }else{
+            comicsView.hideLoading();
+            comicsView.showRetry();
+            comicsView.showError(HeroesApplication.getInstance().getString(R.string.error_network_connection));
+        }
+
 
     }
 
