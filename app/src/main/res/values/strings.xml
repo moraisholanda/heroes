@@ -1,18 +1,14 @@
 <resources>
     <string name="app_name">Heroes</string>
-    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    <string name="ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone.</string>
 
-    <string name="menu_night_mode">Night mode</string>
-    <string name="menu_night_mode_system">Follow system</string>
-    <string name="menu_night_mode_day">Day (always)</string>
-    <string name="menu_night_mode_night">Night (always)</string>
-    <string name="menu_night_mode_auto">Auto</string>
     <string name="label_published">Published :</string>
     <string name="label_price">Price :</string>
     <string name="label_page">Page :</string>
     <string name="label_btn_retry">Tentar novamente</string>
     <string name="label_btn_settings">Ir para configurações de internet</string>
+    <string name="label_page_count">Pages :</string>
 
     <string name="exception_network_connection">Verifique sua conexão!</string>
     <string name="exception_message_generic">Tente novamente!</string>

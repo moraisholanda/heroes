@@ -1,7 +1,7 @@
 package com.marvel.heroes.ui.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,18 +10,24 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
 import com.marvel.heroes.domain.data.interceptor.SharedConstants;
 import com.marvel.heroes.domain.tools.DateUtils;
-import com.marvel.heroes.ui.activities.FullScreenImageActivity;
 import com.marvel.heroes.ui.presenter.ComicsDetailImpl;
 import com.marvel.heroes.ui.presenter.ComicsDetailPresenter;
 import com.marvel.heroes.ui.view.ComicsDetailView;
+import com.nineoldandroids.animation.Animator;
 
 import org.parceler.Parcels;
 
@@ -45,6 +51,13 @@ public class ComicsDetailFragment extends BaseFragment implements ComicsDetailVi
     TextView datePublisehd;
     @BindView(R.id.price_magazine)
     TextView priceMagazine;
+    @BindView(R.id.page_count)
+    TextView pageCount;
+    @BindView(R.id.linerar_info)
+    LinearLayout description;
+
+    Animation slideUpAnimation, slideDownAnimation;
+    private YoYo.YoYoString rope;
 
     private Comics comics;
     private ComicsDetailPresenter presenter = new ComicsDetailImpl(this);
@@ -86,9 +99,10 @@ public class ComicsDetailFragment extends BaseFragment implements ComicsDetailVi
     }
     @OnClick(R.id.magazine_cover)
     void openImageFullScreen(){
-        Intent intent = new Intent(getActivity(), FullScreenImageActivity.class);
+       /* Intent intent = new Intent(getActivity(), FullScreenImageActivity.class);
         intent.putExtra(SharedConstants.EXTRA_COMIC,comics.thumbnail.getPathPortraitIncredible());
-        startActivity(intent);
+        startActivity(intent);*/
+
     }
     private Comics getComicsParcelableFromArgs() {
         Parcelable comic = getArguments().getParcelable(SharedConstants.EXTRA_COMIC);
@@ -97,6 +111,39 @@ public class ComicsDetailFragment extends BaseFragment implements ComicsDetailVi
 
     @Override
     public void showComicsDetail(Comics comics) {
+        description.setVisibility(View.INVISIBLE);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                YoYo.with(Techniques.SlideInDown)
+                        .duration(1800)
+                        .interpolate(new AccelerateDecelerateInterpolator())
+                        .withListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+                                description.setVisibility(View.VISIBLE);
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animation) {
+                                Toast.makeText(getActivity(), "canceled", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animation) {
+
+                            }
+                        })
+                        .playOn(description);
+            }
+        },500);
+
         Glide.with(getActivity())
                 .load(comics.thumbnail.getPathPortraitMedium())
                 .crossFade()
@@ -105,5 +152,7 @@ public class ComicsDetailFragment extends BaseFragment implements ComicsDetailVi
         titleMagazine.setText(!TextUtils.isEmpty(comics.title) ? comics.title : "");
         datePublisehd.setText(!TextUtils.isEmpty(comics.modified) ? DateUtils.parseDate(comics.modified) : "");
         priceMagazine.setText(String.valueOf(comics.prices.get(0).price));
+        pageCount.setText(!TextUtils.isEmpty(String.valueOf(comics.pageCount)) ? String.valueOf(comics.pageCount) : "");
+
     }
 }

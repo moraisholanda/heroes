@@ -55,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:id="@+id/linerar_info"
             android:background="@color/colorBackground"
             android:paddingTop="64dp">
             <TextView
@@ -71,16 +72,17 @@
 
                 <LinearLayout
                     style="@style/Widget.Content"
+                    android:id="@+id/rl_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/info"
                         android:textColor="@android:color/white"
-                        android:text="@string/cheese_ipsum" />
+                        android:text="@string/ipsum" />
 
                 </LinearLayout>
 
@@ -121,7 +123,29 @@
                         android:layout_toRightOf="@+id/label_price"
                         android:layout_below="@+id/date_published"
                         android:layout_alignBaseline="@+id/label_price" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_page_count"
+                        android:id="@+id/label_page"
+                        style="@style/Widget.Label"
+                        android:layout_below="@+id/price_magazine"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/page_count"
+                        tools:text="22"
+                        style="@style/Widget.Text.Info"
+                        android:layout_toRightOf="@+id/label_page"
+                        android:layout_below="@+id/price_magazine"
+                        android:layout_alignBaseline="@+id/label_page" />
                 </RelativeLayout>
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:src="@drawable/spiderman"/>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
