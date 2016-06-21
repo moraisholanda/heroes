@@ -9,8 +9,24 @@
     <string name="label_btn_retry">Tentar novamente</string>
     <string name="label_btn_settings">Ir para configurações de internet</string>
     <string name="label_page_count">Pages :</string>
-
+    <string name="label_name">Name :</string>
+    <string name="label_email">e-mail :</string>
+    <string name="label_github">github :</string>
+    <string name="label_description">About me :</string>
+    <string name="about_me">Sobre mim? Falar que sou apaixonado por tecnologia parace clichê, mas vou dizer assim mesmo: Sou apaixonado por tecnologia!
+        Mas não me encaixo na definição padrão de nerd, e explico: Nunca assisti Guerra nas estrelas, startrek e todos esses filmes celebrados por essa geração nerd,
+        Não sou gamer, para falar a verdade quando adolescente até que pilotava os carros do Top Gear e dava uns tiros em um jogo de faroeste que sempre esqueço o nome,
+        é o que mais me aproxima dessa geração de "nerds", mas como todo desenvolvedor, sou movido a café e se for preparado em uma prensa francesa então.....
+        Iniciei minha carreira profissional há cerca de 6 anos quando ainda era funcionário público do Estado de Alagoas, larguei a faculdade de fisioterapia e fui realizar
+        meu sonho de me tornar o menino da informática, desde então tenho perdido noites de sono, frequentado todos os dias o stackoverflow e principamente tenho
+        aprendido bastante.Sou aluno Caelum,viajei a meca da tecnologia para fazer um curso com eles e hoje sou aluno online(estudando para certificação java).
+        Já briguei muito com os frameworks web para java e hoje me realizo programando (e aprendendo) para android.Fui um "startupeiro" por três anos na
+        IlhaSoft(desenvolvimento mobile/java) e agora não sinto nenhuma saudade do vraptor,Spring,JSF...Vale a pena pontuar que trabalhei com angular(DBServer - Porto Alegre)
+        e node.js(uma api pequena, mas desenvolvi).E por fim e não menos importante, participei de um Hackaton promovido pela camâra dos deputados onde desenvolvemos um aplicativo
+        informativo sobre Violência Obstétrica, que está na play, procura lá por Parto Humanizado.
+    </string>
     <string name="exception_network_connection">Verifique sua conexão!</string>
     <string name="exception_message_generic">Tente novamente!</string>
     <string name="exception_message_comics_not_found">Não foi possível fazer a busca com os criterios informados!</string>
+    <string name="copyright_marvel">Data provided by Marvel. © 2014 Marvel</string>
 </resources>

@@ -12,10 +12,12 @@
         android:id="@+id/recycler_view"
         android:layout_height="wrap_content"
         tools:listitem="@layout/comic_item"/>
+
     <include
         layout="@layout/view_progress"
         />
     <include
         layout="@layout/view_retry"
         />
+
 </LinearLayout>

@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBackground"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="10dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ToolbarColoredBackArrow"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:ignore="UnusedAttribute"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/img_layout"
+        android:layout_marginTop="@dimen/margin_top_image_profile">
+
+
+
+
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:id="@+id/img_edit_user_profile"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/profile" />
+        <ScrollView
+            android:id="@+id/login_form"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/img_edit_user_profile"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_default_detail">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_user_description"
+                    android:text="@string/about_me"
+                    android:gravity="left"
+                    android:layout_below="@+id/img_edit_user_profile"
+                    android:scrollbars = "vertical"
+                    style="@style/Widget.Text.Profile" />
+        </ScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>

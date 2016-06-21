@@ -1,5 +1,6 @@
 package com.marvel.heroes.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -24,6 +25,7 @@ import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
 import com.marvel.heroes.domain.data.interceptor.SharedConstants;
 import com.marvel.heroes.domain.tools.DateUtils;
+import com.marvel.heroes.ui.activities.FullScreenImageActivity;
 import com.marvel.heroes.ui.presenter.ComicsDetailImpl;
 import com.marvel.heroes.ui.presenter.ComicsDetailPresenter;
 import com.marvel.heroes.ui.view.ComicsDetailView;
@@ -99,9 +101,9 @@ public class ComicsDetailFragment extends BaseFragment implements ComicsDetailVi
     }
     @OnClick(R.id.magazine_cover)
     void openImageFullScreen(){
-       /* Intent intent = new Intent(getActivity(), FullScreenImageActivity.class);
+        Intent intent = new Intent(getActivity(), FullScreenImageActivity.class);
         intent.putExtra(SharedConstants.EXTRA_COMIC,comics.thumbnail.getPathPortraitIncredible());
-        startActivity(intent);*/
+        startActivity(intent);
 
     }
     private Comics getComicsParcelableFromArgs() {
