@@ -23,7 +23,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:title="@null"
-            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginStart="18dp"
             app:expandedTitleMarginEnd="64dp">
 
             <ImageView
