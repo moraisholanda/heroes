@@ -12,11 +12,7 @@ import com.bumptech.glide.Glide;
 import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
 
-import java.util.Collection;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by sergio on 21/06/16.
@@ -29,18 +25,8 @@ public class ComicAdapter extends CustomAdapter<Comics> {
 
 
 
-    public void setComicsList(List<Comics> comicsList) {
-
-        notifyDataSetChanged();
-    }
-    private void validateComicsCollection(Collection<Comics> comicsCollection) {
-        if (comicsCollection == null) {
-            throw new IllegalArgumentException("The list cannot be null");
-        }
-    }
-
     public ComicAdapter(List<Comics> data) {
-        super(data, true, true);
+        super(data, false, true);
     }
 
     @Override
@@ -67,7 +53,6 @@ public class ComicAdapter extends CustomAdapter<Comics> {
         }
     }
 
-    //region Override Get ViewHolder
     @Override
     protected RecyclerView.ViewHolder getItemView(LayoutInflater inflater, ViewGroup parent) {
         return new ItemViewHolder(inflater.inflate(R.layout.comic_item, parent, false));
@@ -82,21 +67,19 @@ public class ComicAdapter extends CustomAdapter<Comics> {
     protected RecyclerView.ViewHolder getFooterView(LayoutInflater inflater, ViewGroup parent) {
         return new FooterViewHolder(inflater.inflate(R.layout.item_footer, parent, false));
     }
-    //endregion
 
-    //region ViewHolder Header and Footer
     class ItemViewHolder extends RecyclerView.ViewHolder {
         View view;
-        @BindView(R.id.comic_image)
         ImageView imageView;
-        @BindView(R.id.comic_number)
         TextView textView;
-        @BindView(R.id.item_row)
         LinearLayout itemRow;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(itemView);
+            view = itemView;
+            imageView=(ImageView)itemView.findViewById(R.id.comic_image);
+            textView = (TextView)itemView.findViewById(R.id.comic_number);
+            itemRow = (LinearLayout)itemView.findViewById(R.id.item_row);
         }
     }
 

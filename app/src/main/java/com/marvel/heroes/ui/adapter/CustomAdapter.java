@@ -73,7 +73,7 @@ public abstract class CustomAdapter<T> extends RecyclerView.Adapter<RecyclerView
     }
 
     private boolean isPositionFooter(int position) {
-        return position == getItemCount() - 1;
+        return position == getItemCount() -1;
     }
 
     protected T getItem(int position) {

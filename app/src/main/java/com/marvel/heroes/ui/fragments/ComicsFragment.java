@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.liucanwen.app.headerfooterrecyclerview.ExStaggeredGridLayoutManager;
+import com.liucanwen.app.headerfooterrecyclerview.HeaderAndFooterRecyclerViewAdapter;
+import com.liucanwen.app.headerfooterrecyclerview.HeaderSpanSizeLookup;
+import com.liucanwen.app.headerfooterrecyclerview.RecyclerViewUtils;
 import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
 import com.marvel.heroes.domain.data.interceptor.SharedConstants;
@@ -39,7 +43,7 @@ public class ComicsFragment extends BaseFragment implements ComicsView,OnClickLi
     public static final int REQUEST_CODE = 0;
     private ComicsAdapter adapter;
     private ComicsPresenter presenter;
-    private StaggeredGridLayoutManager gridLayoutManager;
+    private HeaderAndFooterRecyclerViewAdapter headerAndFooterRecyclerViewAdapter;
 
 
     @BindView(R.id.recycler_view)
@@ -53,9 +57,6 @@ public class ComicsFragment extends BaseFragment implements ComicsView,OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new ComicsPresenterImpl(this);
-        adapter = new ComicsAdapter(this);
-        gridLayoutManager = new StaggeredGridLayoutManager(SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL);
-
     }
 
     @Nullable
@@ -96,14 +97,20 @@ public class ComicsFragment extends BaseFragment implements ComicsView,OnClickLi
     }
 
     private void setupRecyclerView() {
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(adapter);
+        adapter = new ComicsAdapter(this);
+        headerAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter);
+        recyclerView.setAdapter(headerAndFooterRecyclerViewAdapter);
+        ExStaggeredGridLayoutManager staggeredGridLayoutManager = new ExStaggeredGridLayoutManager(SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL);
+        staggeredGridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) recyclerView.getAdapter(), staggeredGridLayoutManager.getSpanCount()));
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        View footerView = LayoutInflater.from(getActivity()).inflate(R.layout.item_footer, null);
+        RecyclerViewUtils.setFooterView(recyclerView, footerView);
     }
 
     @Override
     public void showComics(List<Comics> list) {
         if (list != null) {
-            this.adapter.setComicsList(list);
+           this.adapter.setComicsList(list);
         }
     }
 
