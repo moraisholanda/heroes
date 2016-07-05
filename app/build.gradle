@@ -27,12 +27,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "SERVER_URL", '"http://gateway.marvel.com:80"'
+        }
+        debug {
+            buildConfigField "String", "SERVER_URL", '"http://gateway.marvel.com:80"'
+        }
+        heroes.initWith(buildTypes.release)
+
+        heroes {
+            buildConfigField "String", "SERVER_URL", '"http://gateway.marvel.com:80"'
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 retrolambda {

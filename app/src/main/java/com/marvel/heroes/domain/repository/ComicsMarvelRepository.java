@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
 public class ComicsMarvelRepository implements IComicsMarvelRepository {
     @Override
     public Observable<List<Comics>> comics() {
-       return ApiFactory.comicsMarvelApi().getComics(1009610,"1","bb4470a46d0659a43c566ac6056ed48d","479474cf0a28eac9998960da4d96f06b")
+       return ApiFactory.getInstance().comicsMarvelApi().getComics(1009610,"1","bb4470a46d0659a43c566ac6056ed48d","479474cf0a28eac9998960da4d96f06b")
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<DataCollectionResponse<List<Comics>>, List<Comics>>() {
                     @Override
