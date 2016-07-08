@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.marvel.heroes.R;
-import com.marvel.heroes.ui.fragments.ComicsFragment;
+import com.marvel.heroes.ui.fragments.ComicListFragment;
 
 /**
  * Created by sergio on 19/06/16.
@@ -27,7 +27,7 @@ public class ComicsActivity extends BaseActivity {
             }
         });
         if (savedInstanceState == null) {
-            addFragment(R.id.fragmentContainer, new ComicsFragment());
+            addFragment(R.id.fragmentContainer, new ComicListFragment());
         }
     }
 }

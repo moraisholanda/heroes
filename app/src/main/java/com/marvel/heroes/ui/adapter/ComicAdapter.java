@@ -20,7 +20,7 @@ import java.util.List;
 public class ComicAdapter extends CustomAdapter<Comics> {
 
 
-    private OnClickListenerComicsAdapter listenerComicsAdapter;
+    private OnClickListenerItemAdapter listenerComicsAdapter;
     private List<Comics> comicsList;
 
 
