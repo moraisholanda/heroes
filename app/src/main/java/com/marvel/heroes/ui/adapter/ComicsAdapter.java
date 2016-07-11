@@ -3,13 +3,13 @@ package com.marvel.heroes.ui.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
 import com.marvel.heroes.ui.viewholder.AbstractRecyclerViewHolder;
 import com.marvel.heroes.ui.viewholder.ComicsViewHolder;
+import com.marvel.heroes.ui.viewholder.FooterViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -82,14 +82,6 @@ public class ComicsAdapter extends RecyclerView.Adapter<AbstractRecyclerViewHold
     private void validateComicsCollection(Collection<Comics> comicsCollection) {
         if (comicsCollection == null) {
             throw new IllegalArgumentException("The list cannot be null");
-        }
-    }
-
-    public class FooterViewHolder extends AbstractRecyclerViewHolder {
-
-        public FooterViewHolder(View itemView) {
-            super(itemView);
-
         }
     }
 }
