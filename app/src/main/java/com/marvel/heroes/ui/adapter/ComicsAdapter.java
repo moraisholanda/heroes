@@ -35,15 +35,11 @@ public class ComicsAdapter extends RecyclerView.Adapter<AbstractRecyclerViewHold
 
     @Override
     public AbstractRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         if (FOOTER == viewType) {
-            View viewFooter = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_footer, parent, false);
-            return new FooterViewHolder(viewFooter);
-
+            return new FooterViewHolder(inflater.inflate(R.layout.item_footer, parent, false));
         } else {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.comic_item, parent, false);
-            return new ComicsViewHolder(view);
+            return new ComicsViewHolder(inflater.inflate(R.layout.comic_item, parent, false));
         }
     }
 
