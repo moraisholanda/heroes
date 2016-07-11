@@ -1,7 +1,6 @@
 package com.marvel.heroes.ui.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -45,12 +44,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<AbstractRecyclerViewHold
 
     @Override
     public void onBindViewHolder(AbstractRecyclerViewHolder holder, int position) {
-        if (holder instanceof FooterViewHolder) {
-            ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
-            if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
-                ((StaggeredGridLayoutManager.LayoutParams) lp).setFullSpan(true);
-            }
-        } else {
+        if (holder instanceof ComicsViewHolder) {
             ((ComicsViewHolder) holder).bind(items.get(position), listenerComicsAdapter);
         }
     }
@@ -61,7 +55,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<AbstractRecyclerViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if (isFooter(position) && mustBeVisible) {
+        if (isFooter(position)) {
             return FOOTER;
         } else {
             return ITEM;
