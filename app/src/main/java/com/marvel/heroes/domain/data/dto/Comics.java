@@ -16,7 +16,7 @@ public class Comics {
 
     public String title;
 
-    public double issueNumber;
+    public int issueNumber;
 
     public String variantDescription;
 

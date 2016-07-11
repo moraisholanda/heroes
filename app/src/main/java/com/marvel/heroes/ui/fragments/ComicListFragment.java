@@ -94,7 +94,7 @@ public class ComicListFragment extends BaseFragment implements ComicsView,OnClic
     }
 
     private void setupRecyclerView() {
-        adapter = new ComicsAdapter(this,true);
+        adapter = new ComicsAdapter(this,false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
     }
@@ -102,7 +102,7 @@ public class ComicListFragment extends BaseFragment implements ComicsView,OnClic
     @Override
     public void showComics(List<Comics> list) {
         if (list != null) {
-           this.adapter.setComicsList(list);
+           this.adapter.setItems(list);
         }
     }
 
