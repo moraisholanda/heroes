@@ -1,17 +1,21 @@
 package com.marvel.heroes.ui.adapter;
 
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.marvel.heroes.R;
 import com.marvel.heroes.domain.data.dto.Comics;
+import com.marvel.heroes.domain.data.interceptor.SharedConstants;
 import com.marvel.heroes.ui.viewholder.AbstractRecyclerViewHolder;
 import com.marvel.heroes.ui.viewholder.ComicsViewHolder;
 import com.marvel.heroes.ui.viewholder.FooterViewHolder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,7 +27,6 @@ public class ComicsAdapter extends RecyclerView.Adapter<AbstractRecyclerViewHold
     private OnClickListenerItemAdapter listenerComicsAdapter;
     private static final int FOOTER = 0;
     private static final int ITEM = 1;
-    private final int countFooter = 1;
     private boolean mustBeVisible;
 
     public ComicsAdapter(OnClickListenerItemAdapter listenerComicsAdapter, boolean mustBeVisible) {
@@ -77,6 +80,20 @@ public class ComicsAdapter extends RecyclerView.Adapter<AbstractRecyclerViewHold
         if (comicsCollection == null) {
             throw new IllegalArgumentException("The list cannot be null");
         }
+    }
+    public void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof SavedStateAdapter) {
+            SavedStateAdapter savedState = (SavedStateAdapter) state;
+            items = new ArrayList<>(Arrays.asList((Comics[]) savedState.getItems()));
+        }
+    }
+
+    public Parcelable onSaveInstanceState() {
+        return new SavedStateAdapter<>(SharedConstants.EXTRA_COMICS_LIST, items.toArray(new Comics[items.size()]));
+    }
+
+    public List<Comics> getItems() {
+        return Collections.unmodifiableList(items);
     }
 }
 

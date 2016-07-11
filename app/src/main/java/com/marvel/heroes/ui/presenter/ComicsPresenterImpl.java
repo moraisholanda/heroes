@@ -40,13 +40,8 @@ public class ComicsPresenterImpl implements ComicsPresenter {
                         @Override
                         public void onNext(List<Comics> list) {
                             comicsList = list;
-                            if(comicsList.size()==0){
-                                shorErrorMessage(new DefaultErrorBundle(new ComicsNotFoundException()));
-                            }else {
-                                comicsView.showComics(list);
-                            }
+                            showList(list);
                         }
-
                         @Override
                         public void onError(Throwable e) {
                             comicsView.hideLoading();
@@ -66,6 +61,14 @@ public class ComicsPresenterImpl implements ComicsPresenter {
             shorErrorMessage(new DefaultErrorBundle(new NetworkConnectionException()));
         }
 
+    }
+
+    private void showList(List<Comics> list) {
+        if(comicsList.size()==0){
+            shorErrorMessage(new DefaultErrorBundle(new ComicsNotFoundException()));
+        }else {
+            comicsView.showComics(list);
+        }
     }
 
     private void shorErrorMessage(ErrorBundle errorBundle){

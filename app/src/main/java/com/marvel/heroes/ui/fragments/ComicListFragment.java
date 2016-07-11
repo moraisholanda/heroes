@@ -74,18 +74,17 @@ public class ComicListFragment extends BaseFragment implements ComicsView,OnClic
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        List<Comics> comicsList = presenter.comicsParcelable();
-        Parcelable comicParcelable = Parcels.wrap(comicsList);
-        outState.putParcelable(SharedConstants.EXTRA_COMICS_LIST,comicParcelable);
+        outState.putParcelable(SharedConstants.EXTRA_COMICS_LIST,adapter.onSaveInstanceState());
     }
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
 
         if (savedInstanceState != null) {
-            Parcelable comicsParcelable = savedInstanceState.getParcelable(SharedConstants.EXTRA_COMICS_LIST);
-            List<Comics> comicsList = Parcels.unwrap(comicsParcelable);
-            presenter.restoreParcelable(comicsList);
+          //  Parcelable comicsParcelable = savedInstanceState.getParcelable(SharedConstants.EXTRA_COMICS_LIST);
+         //   List<Comics> comicsList = Parcels.unwrap(comicsParcelable);
+         //   presenter.restoreParcelable(comicsList);
+            adapter.onRestoreInstanceState(savedInstanceState.getParcelable(SharedConstants.EXTRA_COMICS_LIST));
         }
     }
 
