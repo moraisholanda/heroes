@@ -1,2 +1,2 @@
 # heroes
-Simple Project Example using MCV + Retrofit
+Simple Project Example using MVP + Retrofit
